@@ -1,0 +1,1 @@
+var PersonalInfoApp = angular.module("PersonalInfoApp", []);   
