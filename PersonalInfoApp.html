@@ -5,57 +5,143 @@
 	
 	<!--import angularJS tools, the MainController, and the Module-->
 	<head>
-	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 	<script src="app.js"></script>
     <script src="MainController.js"></script>
-    
+
 	 <!-- BOOTSTRAP -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	
-	<!-- Color Scheme for Error Message -->
+	<!-- HTML styling for layout -->
 	<style> 
-	input.ng-invalid.ng-dirty{border:3px solid red;}
+	body {background-color: powderblue;}
+	h1   {color: navy;}
+	
+	<!-- Color Scheme for Error Message -->
+	input.ng-invalid.ng-dirty.ng-touched{border:3px solid red;}
 	</style>
-	</head>
+
 	
-	
-	
-	<body ng-controller="MainController">  
-    <form name="form1">
+	<body data-ng-controller="MainController">  
+    <center><form name="form1">
+    
+    
+    	<!-- Webpage Title -->
+		<h1><center><u> PERSONAL INFO FORM </u></center></h1>
+		<br><br>		
+		</head>
+
+        <table>
         
-        <!-- Name -->
-        <div>
-            <label>Name:</label>
-            <input type="text" ng-model="name"></input>
-            <h1>{{name}}</h1>
-        </div> 
-         
-         <!-- Email -->   
-    	<div>
-        	<label>Email: </label>
-        	<input type="email" name="email" ng-model="email" required>
-        	<span ng-show="form1.email.$dirty && form1.email.$error.email">improper email format!</span>
+        <!-- First Name -->
+        <tr>
+        <div class="has-error">
+            <td><label>First Name:</label></td>
+            <td>
+            <input type="text" name="Fname" ng-model="Fname" ng-maxlength="15" ng-pattern="/^[a-zA-Z\s]*$/" required>
+            <span class="help-block" ng-show="form1.Fname.$dirty && form1.Fname.$error.maxlength">First Name too long!</span>
+        	<span class="help-block" ng-show="form1.Fname.$dirty && form1.Fname.$error.pattern">Only letters allowed in this field!</span>
+        	</td>
         </div>
+       </tr>
+       
+        <!-- Last Name -->
+        <tr>
+        <div class="has-error">
+        <td><label>Last Name:</label> </td>
+       		<td>
+            <input type="text" name="Lname" ng-model="Lname" ng-maxlength="15" ng-pattern="/^[a-zA-Z\s]*$/" required>
+            <span class="help-block" ng-show="form1.Lname.$dirty && form1.Lname.$error.maxlength">Last Name too long!</span>
+         	<span class="help-block" ng-show="form1.Lname.$dirty && form1.Lname.$error.pattern">Only letters allowed in this field!</span>
+			</td>
+         </div>
+    </tr>
+         
+         
+        <!-- Email -->  
+        <tr> 
+    	<div class="has-error">
+        	<td><label>Email: </label></td>
+        	<td>
+        	<input type="email" name="email" ng-model="email" required>
+        	<span class="help-block" ng-show="form1.email.$touched && form1.email.$error.email">improper email format!</span>
+        	</td>
+        </div>
+        </tr>
+        
         
          <!-- Phone Number -->
-        <div>
-        	<label>Phone Number: </label>
+        <tr> 
+       	<div class="has-error">
+        	<td><label>Phone: </label></td>
+        	<td>
         	<input type="text" name="phone" ng-pattern="/^\+?\d{3}[- ]?\d{3}[- ]?\d{4}$/" ng-model="phone" required>
-        	<span ng-show="form1.phone.$dirty && form1.phone.$error.pattern">format required: (###-###-####)</span>
+        	<span class="help-block" ng-show="form1.phone.$dirty && form1.phone.$error.pattern">this format is required: (###-###-####)</span>
+       		</td>
+       	</div>
+       	</tr>
+    	
+    	
+        <!-- Address -->
+        <tr>
+        <div class="has-error">
+            <td><label>Address:</label></td>
+            <td>
+            <input type="text" name="address" ng-model="address" ng-pattern="/^[a-zA-Z0-9\s]*$/" required>
+        	<span class="help-block" ng-show="form1.address.$dirty && form1.address.$error.pattern">Only letters allowed in this field!</span>
+        	</td>
         </div>
+        </tr>
         
+
+        <!-- City -->
+        <tr>
+        <div class="has-error">
+            <td><label>City:</label></td>
+            <td>
+            <input type="text" name="city" ng-model="city" ng-pattern="/^[a-zA-Z\s]*$/" required>
+        	<span class="help-block" ng-show="form1.city.$dirty && form1.city.$error.pattern">Only letters allowed in this field!</span>
+       		</td>
+        </div>
+        </tr>
+        
+         <!-- State -->
+        <tr>
+        <div>
+        	<td><label>State:</label></td>
+        	<td>
+        	<select ng-model="states" ng-options="x for x in state" required>
+			</td>
+			</select>
+        </div>
+        </tr>
+    
+    	<tr>
          <!-- Check Box -->
          <div><br> 
+         	<td>
          	<input type="checkbox" ng-model="accept" value="1" required>
+         	</td>
+         	<td>
          	<label> I certify that all info above is accurate & true</label> 
+         	</td>
          </div> 
+        </tr>
         
     	<br>
-        <button class="btn btn-primary" ng-disabled="form1.$invalid" type="submit">Submit</button>
-        
+    	<tr>
+    	<td>
+        <button class="btn btn-primary" ng-disabled="form1.$invalid" type="submit">Submit</button>    
+       	</td>
+       	</tr>
+        </table> 
          
-    </form>
+         
+    </form></center>
     <!-- BOOTSTRAP -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> 
 	</body>
 	</html>
+	
+	
+	
